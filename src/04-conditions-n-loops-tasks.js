@@ -353,8 +353,8 @@ function isBracketsBalanced(/* str */) {
  *    365, 4  => '11231'
  *    365, 10 => '365'
  */
-function toNaryString(/* num, n */) {
-  throw new Error('Not implemented');
+function toNaryString(num, n) {
+  return num.toString(n);
 }
 
 
@@ -393,8 +393,18 @@ function getCommonDirectoryPath(/* pathes */) {
  *                         [ 6 ]]
  *
  */
-function getMatrixProduct(/* m1, m2 */) {
-  throw new Error('Not implemented');
+function getMatrixProduct(m1, m2) {
+  const nemArr = new Array(m1.length);
+  for (let i = 0; i < m1.length; i += 1) {
+    nemArr[i] = new Array(m2[0].length);
+    for (let j = 0; j < m2[0].length; j += 1) {
+      nemArr[i][j] = 0;
+      for (let k = 0; k < m1[0].length; k += 1) {
+        nemArr[i][j] += m1[i][k] * m2[k][j];
+      }
+    }
+  }
+  return nemArr;
 }
 
 
@@ -428,8 +438,33 @@ function getMatrixProduct(/* m1, m2 */) {
  *    [    ,   ,    ]]
  *
  */
-function evaluateTicTacToePosition(/* position */) {
-  throw new Error('Not implemented');
+function evaluateTicTacToePosition(position) {
+  let arr = position.slice();
+  for (let i = 0; i < 3; i += 1) {
+    while (arr[i].length < 3) {
+      arr[i].push('undefined');
+    }
+  }
+  arr = arr.flat();
+  const winners = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6],
+  ];
+  for (let i = 0; i < winners.length; i += 1) {
+    const [a, b, c] = winners[i];
+    for (let j = 0; j < 3; j += 1) {
+      if (arr[a] && arr[a] === arr[b] && arr[a] === arr[c]) {
+        return arr[a];
+      }
+    }
+  }
+  return undefined;
 }
 
 
